@@ -22,8 +22,6 @@
 
 package org.jboss.modules.filter;
 
-import java.io.File;
-
 /**
  * @author <a href="mailto:david.lloyd@redhat.com">David M. Lloyd</a>
  */
@@ -32,11 +30,11 @@ final class ChildPathFilter implements PathFilter {
     private final String prefix;
 
     ChildPathFilter(final String path) {
-        prefix = path.charAt(path.length() - 1) == File.separatorChar ? path : path + File.separatorChar;
+        prefix = path.charAt(path.length() - 1) == '/' ? path : path + "/";
     }
 
     public boolean accept(final String path) {
-        return path.regionMatches(true, 0, prefix, 0, prefix.length());
+        return path.startsWith(prefix);
     }
 
     public boolean equals(final Object obj) {
